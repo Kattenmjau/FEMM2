@@ -1,5 +1,6 @@
 mainaccount = "kapanda_OFC"
 local prefix = ";"
+local AllowAbuse = true
 repeat wait(1)
 until game.Players:FindFirstChild(mainaccount)
 local LPlayer = game.Players[mainaccount]
@@ -7,35 +8,6 @@ messageLL = "Bot Made By Lego!"
 speed = 0.5
 render1 = false
 resettime = 5.4
-
----------------------commands--------------------------------------------------------------------------
---tp teleports alts to you
---msg says message
---cmds Tell CMDS
---sit sits alts
---unsit unsits alts
---rs resets alts
---fling excutes fling scripts on alts remeber to use account for lag
---leave makes alts leave 
---float floats alts
---unfloat unfloats alts
---say makes alts say message
---tweento makes alt tween to player
---noclip phase trugh walls
---unclip no noclip
---reanim Renimate
---smoothmoves Dance
-
----------------grapics commands-------------------------------------------------------------------------
-
---gr1 reduces grapics on alts more cpu power and gpu
---gr2 same as gr1 just much more 
---fpscap - number fps cap 
---unrender REALLY good for performance 
---render renders 
---checkmin checks if you have minimezed tabs
-
---------------------------------------------------------------------------------------------------------
 
 LPlayer.Chatted:Connect(function(msg)
 	msg = msg:lower()
@@ -69,14 +41,36 @@ p1.CFrame = game.Players[p2].Character.HumanoidRootPart.CFrame
 
 		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
 	end
+		if cmd == "re" then
+for i,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+    if v:IsA("Accessory") then
+        v.Handle.Anchored = true
+    end
+end
+game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+local Human = game.Players.LocalPlayer.Character.Humanoid
+local NewHuman = Human:Clone()
+NewHuman.Parent = game.Players.LocalPlayer.Character
+Human:Destroy()
+local SavedPos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+local Refreshed = false
+game.Players.LocalPlayer.CharacterAdded:Connect(function()
+    if Refreshed == false then
+        Refreshed = true
+        game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer("Refreshed!", "All")
+        wait(0.1)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = SavedPos
+    end
+end)
+end
 		if cmd == "cmds" then
             local DelayTest = 1
-		    local Message = ";tp (TP EVERY ALTS TO U)"
+		    local Message = ";tp (Tp Alt To You)"
             local Message1 = ";sit (SelfExplating)"
-            local Message2 = ";unsit (SelfExplanating)"
+            local Message2 = ";re (refresh)"
             local Message3 = ";say TEXT (Chat A Message)"
             local Message4 = ";tweento NAME (Teleport To Someone)"
-            local Message5 = ";reanim (Reanimates)"
+            local Message5 = ";reanim (Reanimates), ;anims (See Animations)"
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message, "All")
             wait(DelayTest)
             game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message1, "All")
@@ -117,7 +111,9 @@ p1.CFrame = game.Players[p2].Character.HumanoidRootPart.CFrame
 		    game.Players.LocalPlayer.Character.Humanoid.Health = 0
     end
 		if cmd == "leave" then
-		    game:Shutdown()
+            if AllowAbuse == true then
+                game:Shutdown()
+            end
     end
         if cmd == "float" then
             for i, player in ipairs(game.Players:GetPlayers()) do -- use GetPlayers()
@@ -323,28 +319,18 @@ wait (8)
 game:GetService("Players").LocalPlayer.PlayerGui.ScreenGuirtw:Destroy()
 end
 
-----------------------------------------------fpscap-----------------------------------------------------------------------------
-
-if cmd == "fpscap" then
-    local cap = string.sub(msg,space+1)
-    	    local fps = cap
-local clock = tick()
-
-while true do
-    while clock + 1/fps > tick() do end
-    wait()
-    clock = tick()
-    end
-    end
-
 -------------------------------------render / unrender------------------------------------------------------------------------------
 
 if cmd == "unrender" then
-    game:GetService("RunService"):Set3dRenderingEnabled(false)
+            if AllowAbuse == true then
+                game:GetService("RunService"):Set3dRenderingEnabled(false)
+            end
     end
 
 if cmd == "render" then
-    game:GetService("RunService"):Set3dRenderingEnabled(true)
+            if AllowAbuse == true then
+                game:GetService("RunService"):Set3dRenderingEnabled(true)
+            end
     end
 
 ----------------------------------------------player thing--------------------------------------------------------------------------
