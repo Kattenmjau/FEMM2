@@ -1,0 +1,551 @@
+rbxname = "kapanda_OFC"
+local prefix = ";"
+repeat wait()
+until game.Players:FindFirstChild(rbxname)
+local LPlayer = game.Players[rbxname]
+messageLL = "Bot Made By Lego" 
+speed = 0.5
+render1 = false
+resettime = 5.4
+
+---------------------commands--------------------------------------------------------------------------
+--tp teleports alts to you
+--msg says message
+--cmds Tell CMDS
+--sit sits alts
+--unsit unsits alts
+--rs resets alts
+--fling excutes fling scripts on alts remeber to use account for lag
+--leave makes alts leave 
+--float floats alts
+--unfloat unfloats alts
+--say makes alts say message
+--tweento makes alt tween to player
+--noclip phase trugh walls
+--unclip no noclip
+--reanim Renimate
+--smoothmoves Dance
+
+---------------grapics commands-------------------------------------------------------------------------
+
+--gr1 reduces grapics on alts more cpu power and gpu
+--gr2 same as gr1 just much more 
+--fpscap - number fps cap 
+--unrender REALLY good for performance 
+--render renders 
+--checkmin checks if you have minimezed tabs
+
+--------------------------------------------------------------------------------------------------------
+
+LPlayer.Chatted:Connect(function(msg)
+	msg = msg:lower()
+	if string.sub(msg,1,3) == "/e " then
+		msg = string.sub(msg,4)
+	end
+	if string.sub(msg,1,1) == prefix then
+		local cmd
+		local space = string.find(msg," ")
+		if space then
+			cmd = string.sub(msg,2,space-1)
+		else
+			cmd = string.sub(msg,2)
+		end
+		
+--------------------------------commands scripts----------------------------------------------------------
+		
+		if cmd == "tp" then
+		    local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+local p2 = rbxname
+local pos = p1.CFrame
+
+p1.CFrame = game.Players[p2].Character.HumanoidRootPart.CFrame
+	end
+
+		if cmd == "msg" then
+		    local args = {
+			[1] = messageLL,
+			[2] = "All"
+		}
+
+		game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+	end
+		if cmd == "cmds" then
+            local DelayTest = 1
+		    local Message = ";tp (TP EVERY ALTS TO U)"
+            local Message1 = ";sit (SelfExplating)"
+            local Message2 = ";unsit (SelfExplanating)"
+            local Message3 = ";say TEXT (Chat A Message)"
+            local Message4 = ";tweento NAME (Teleport To Someone)"
+            local Message5 = ";reanim (Reanimates)"
+            local Message6 = ";smoothmoves (Dance USE AFTER REANIMATED"
+
+
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message, "All")
+            wait(DelayTest)
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message1, "All")
+            wait(DelayTest)
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message2, "All")
+            wait(DelayTest)
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message3, "All")
+            wait(DelayTest)
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message4, "All")
+            wait(DelayTest)
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message5, "All")
+            wait(DelayTest)
+            game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(Message6, "All")
+        end
+
+		if cmd == "sit" then
+		    game.Players.LocalPlayer.Character.Humanoid.Sit = true
+    end
+		if cmd =="unsit" then
+		    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+    end 
+		if cmd == "reset" then
+		    game.Players.LocalPlayer.Character.Humanoid.Health = 0
+    end
+		if cmd == "fling" then
+		    loadstring(game:HttpGet('https://files.shade4real.net/flinger.txt'))()
+    end
+		if cmd == "leave" then
+		    game:Shutdown()
+    end
+        if cmd == "float" then
+            for i, player in ipairs(game.Players:GetPlayers()) do -- use GetPlayers()
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.Position + Vector3.new(0, 10, 0))
+    end
+wait(0.2)
+game.Players.LocalPlayer.Character.Head.Anchored = true
+    end
+        if cmd == "unfloat" then
+            	    for i, player in ipairs(game.Players:GetPlayers()) do -- use GetPlayers()
+        player.Character.HumanoidRootPart.CFrame = CFrame.new(player.Character.HumanoidRootPart.Position + Vector3.new(0, 10, 0))
+    end
+wait(0.2)
+game.Players.LocalPlayer.Character.Head.Anchored = false
+    end
+        if cmd == "say" then
+            		if cmd == "say" then
+            		    local var = string.sub(msg,space+1)
+		                game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(var, "All")
+    end
+    end
+        if cmd == "tweento" then
+        		    local var1 = string.sub(msg,space+1)
+		    local target = GetPlayer(var1)
+		    local cords = target.Character.HumanoidRootPart.Position
+		    
+	        local New_CFrame = CFrame.new(cords)
+		    
+		    local ts = game:GetService('TweenService')
+            local char = game.Players.LocalPlayer.Character
+            
+            local part = char.HumanoidRootPart
+            local ti = TweenInfo.new(speed, Enum.EasingStyle.Linear)
+            local tp = {CFrame = New_CFrame}
+            ts:Create(part, ti, tp):Play()
+        end
+        if cmd== "noclip" then
+            local noclip = true char = game.Players.LocalPlayer.Character while true do if noclip == true then for _,v in pairs(char:children()) do pcall(function() if v.className == "Part" then v.CanCollide = false elseif v.ClassName == "Model" then v.Head.CanCollide = false end end) end end game:service("RunService").Stepped:wait() end
+    end
+        if cmd == "unclip" then
+            local cords2 = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+            game.Players.LocalPlayer.Character.Humanoid.Health = 0
+            wait(resettime)
+            game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(cords2)
+    end
+        if cmd == "smoothmoves" then
+local playanother = false
+local playing = false
+local rtrnv;
+local c;
+local tbl3;
+local v;
+local anim;
+local count;
+local hhhh;
+local asdf;
+local s;
+local animid;
+local plr;
+local char;
+local cframe;
+local torso;
+local rs;
+local ls;
+local rh;
+local lh;
+local n;
+local rj;
+local rsc0;
+local lsc0;
+local rhc0;
+local lhc0;
+local rjc0;
+local nc0;
+local gc0;
+local orsc0;
+local olsc0;
+local orhc0;
+local olhc0;
+local orjc0;
+local onc0;
+local count2;
+local maxcount2;
+
+local function getnext(tbl,number)
+	c=100
+	rtrnv=0
+	for i,v in pairs(tbl) do
+		if i>number and i-number<c then
+			c=i-number
+			rtrnv=i
+		end
+	end
+	return(rtrnv)
+end
+local function wait2(tim)
+	if tim<0.1 then
+		game:GetService("RunService").Heartbeat:Wait()
+	else
+		for i=1,tim*40 do
+			game:GetService("RunService").Heartbeat:Wait()
+		end
+	end
+end
+local function kftotbl(kf) -- Below this is literal pain..
+	tbl3 = {}
+	for i,v in pairs(kf:GetDescendants()) do
+		if v:IsA("Pose") then
+			tbl3[string.sub(v.Name,1,1)..string.sub(v.Name,#v.Name,#v.Name)] = v.CFrame
+		end
+	end
+	return(tbl3)
+end
+		if playing == true then
+			s:Destroy()
+			playing = false
+			playanother = true
+		end
+		wait()
+		spawn(function()
+			if playanother == true then
+				playanother = false
+			end
+			playing = true
+			s = Instance.new("Sound", game:GetService("Players").LocalPlayer.Character.Torso)
+			s.Looped = true
+			s.Playing = true
+			wait(.1) -- Do not change because changing it will break.
+			animid="rbxassetid://4900539662"
+			plr = game.Players.LocalPlayer
+			char = game:GetService("Players").LocalPlayer.Character
+			cframe = char.HumanoidRootPart.CFrame
+			torso = game:GetService("Players").LocalPlayer.Character.Torso
+			-----------------------------------------------------------
+			rs = torso["Right Shoulder"] -- Just took this from another script(Faster).
+			ls = torso["Left Shoulder"]
+			rh = torso["Right Hip"]
+			lh = torso["Left Hip"]
+			n = torso["Neck"]
+			rj = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart["RootJoint"]
+			rsc0 = rs.C0
+			lsc0 = ls.C0
+			rhc0 = rh.C0
+			lhc0 = lh.C0
+			rjc0 = rj.C0
+			nc0 = n.C0
+			gc0 = CFrame.new()
+			orsc0 = rs.C0
+			olsc0 = ls.C0
+			orhc0 = rh.C0
+			olhc0 = lh.C0
+			orjc0 = rj.C0
+			onc0 = n.C0
+			count2 = 100
+			maxcount2=100
+			-----------------------------------------------------------
+			game:GetService("RunService").Heartbeat:Connect(function() -- Speed.
+				if playanother == true then
+					return nil
+				else
+					count2 = count2+1
+					if count2<=maxcount2 then
+						rs.Transform=rs.Transform:Lerp(rsc0,count2/maxcount2)
+						ls.Transform=ls.Transform:Lerp(lsc0,count2/maxcount2)
+						rh.Transform=rh.Transform:Lerp(rhc0,count2/maxcount2)
+						lh.Transform=lh.Transform:Lerp(lhc0,count2/maxcount2)
+						n.Transform=n.Transform:Lerp(nc0,count2/maxcount2)
+						rj.Transform=rj.Transform:Lerp(rjc0,count2/maxcount2)
+					end
+				end
+			end)
+			-----------------------------------------------------------
+			animid=game:GetObjects(animid)[1]
+			anim={}
+			for i,v in pairs(animid:GetChildren()) do
+				if v:IsA("Keyframe") then
+					anim[v.Time]=kftotbl(v)
+				end
+			end
+			
+			count = 0
+			char=game:GetService("Players").LocalPlayer.Character
+			hhhh=game:GetService("Players").LocalPlayer.Character.Humanoid.Animator
+			hhhh.Parent = nil
+			for _,v in pairs(char.Humanoid:GetPlayingAnimationTracks()) do
+				v:Stop()
+			end
+			
+			plr.CharacterRemoving:Connect(function()
+				if playing == true then
+					playing = false
+				end
+			end)
+			
+			while wait() do
+				if playanother == true then
+					break
+				else
+					for i,oasjdadlasdkadkldjkl in pairs(anim) do
+						asdf=getnext(anim,count)
+						v=anim[asdf]
+						if v["Lg"] then
+							lhc0 = v["Lg"]
+						end
+						if v["Rg"] then
+							rhc0 = v["Rg"]
+						end
+						if v["Lm"] then
+							lsc0 = v["Lm"]
+						end
+						if v["Rm"] then
+							rsc0 = v["Rm"]
+						end
+						if v["To"] then
+							rjc0 = v["To"]
+						end
+						if v["Hd"] then
+							nc0 = v["Hd"]
+						end
+						count2=0
+						maxcount2=asdf-count
+						count=asdf
+						wait(asdf-count)
+						count2=maxcount2
+						if v["Lg"] then
+							char.Torso["Left Hip"].Transform = v["Lg"]
+						end
+						if v["Rg"] then
+							char.Torso["Right Hip"].Transform = v["Rg"]
+						end
+						if v["Lm"] then
+							char.Torso["Left Shoulder"].Transform = v["Lm"]
+						end
+						if v["Rm"] then
+							char.Torso["Right Shoulder"].Transform = v["Rm"]
+						end
+						if v["To"] then
+							char.HumanoidRootPart["RootJoint"].Transform = v["To"]
+						end
+						if v["Hd"] then
+							char.Torso["Neck"].Transform = v["Hd"]
+						end
+					end
+end
+end
+end)
+    end
+        if cmd == "reanim" then
+        
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/LegoScripter/ControlAlt/main/Reanim'),true))()
+
+    end
+
+
+-----------------------------grapics scripts-----------------------------------------------------------------------------------
+if cmd == "gr1" then
+    local a = game
+
+local b = a.Workspace
+
+local c = a.Lighting
+
+local d = b.Terrain
+
+d.WaterWaveSize = 0
+
+d.WaterWaveSpeed = 0
+
+d.WaterReflectance = 0
+
+d.WaterTransparency = 0
+
+c.GlobalShadows = false
+
+c.FogEnd = 9e9
+
+c.Brightness = 0
+
+settings().Rendering.QualityLevel = "Level01"
+
+for e, f in pairs(a:GetDescendants()) do
+
+if f:IsA("Part") or f:IsA("Union") or f:IsA("CornerWedgePart") or f:IsA("TrussPart") then
+
+f.Material = "Plastic"
+
+f.Reflectance = 0
+
+elseif f:IsA("Decal") or f:IsA("Texture") then
+
+f.Transparency = 0
+
+elseif f:IsA("ParticleEmitter") or f:IsA("Trail") then
+
+f.Lifetime = NumberRange.new(0)
+
+elseif f:IsA("Explosion") then
+
+f.BlastPressure = 0
+
+f.BlastRadius = 0
+
+elseif f:IsA("Fire") or f:IsA("SpotLight") or f:IsA("Smoke") or f:IsA("Sparkles") then
+
+f.Enabled = false
+
+elseif f:IsA("MeshPart") then
+
+f.Material = "Plastic"
+
+f.Reflectance = 0
+
+f.TextureID = 10385902758728957
+
+end
+
+end
+
+for e, g in pairs(c:GetChildren()) do
+
+if
+
+g:IsA("BlurEffect") or g:IsA("SunRaysEffect") or g:IsA("ColorCorrectionEffect") or g:IsA("BloomEffect") or
+
+g:IsA("DepthOfFieldEffect")
+
+then
+
+g.Enabled = false
+
+end
+
+end
+
+sethiddenproperty(game.Lighting, "Technology", "Compatibility")
+end
+
+
+
+if cmd == "gr2" then
+    for _,v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "Part"
+or v.ClassName == "SpawnLocation"
+or v.ClassName == "WedgePart"
+or v.ClassName == "Terrain"
+or v.ClassName == "MeshPart" then
+v.BrickColor = BrickColor.new(155, 155, 155)
+v.Material = "Plastic"
+end
+end
+
+for _,v in pairs(workspace:GetDescendants()) do
+if v.ClassName == "Decal"
+or v.ClassName == "Texture" then
+v:Destroy()
+end
+end
+end
+
+------------------------------------------------check minimezed -----------------------------------------------------------------
+
+if cmd == "checkmin" then
+    local ScreenGuirtw = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGuirtw.Name = "ScreenGuirtw"
+ScreenGuirtw.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGuirtw.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame.Parent = ScreenGuirtw
+Frame.BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Frame.Position = UDim2.new(0.295296818, 0, 0.243119255, 0)
+Frame.Size = UDim2.new(0, 531, 0, 335)
+
+TextLabel.Parent = ScreenGuirtw
+TextLabel.BackgroundColor3 = Color3.fromRGB(170, 0, 0)
+TextLabel.Position = UDim2.new(0.356977642, 0, 0.370030582, 0)
+TextLabel.Size = UDim2.new(0, 370, 0, 170)
+TextLabel.Font = Enum.Font.SourceSans
+TextLabel.Text = "NOT MINIMIZED"
+TextLabel.TextColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.TextSize = 60.000
+
+
+
+wait (8)
+game:GetService("Players").LocalPlayer.PlayerGui.ScreenGuirtw:Destroy()
+end
+
+----------------------------------------------fpscap-----------------------------------------------------------------------------
+
+if cmd == "fpscap" then
+    local cap = string.sub(msg,space+1)
+    	    local fps = cap
+local clock = tick()
+
+while true do
+    while clock + 1/fps > tick() do end
+    wait()
+    clock = tick()
+    end
+    end
+
+-------------------------------------render / unrender------------------------------------------------------------------------------
+
+if cmd == "unrender" then
+    game:GetService("RunService"):Set3dRenderingEnabled(false)
+    end
+
+if cmd == "render" then
+    game:GetService("RunService"):Set3dRenderingEnabled(true)
+    end
+
+----------------------------------------------player thing--------------------------------------------------------------------------
+function GetPlayer(String)
+    local plr
+    local strl = String:lower()
+        for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+            if v.Name:lower():sub(1, #String) == String:lower() then
+                plr = v
+            end 
+        end
+        if String == "me" then
+                plr = game.Players.LocalPlayer
+            end
+        if String == "" or String == " " then
+           plr = nil
+        end
+    return plr
+end
+
+	end
+end)
+------------------------------------------------------automatic excutes--------------------------------------------------------------
+if render1 == true then
+    game:GetService("RunService"):Set3dRenderingEnabled(false)
+    end
